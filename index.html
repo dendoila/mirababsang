@@ -1,0 +1,660 @@
+<title>미라씨 밥상</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+
+  :root{
+    --bg: #F7F5EF;
+    --bg-alt: #F0EDE3;
+    --ink: #2A2521;
+    --ink-soft: #6B6459;
+    --ink-faint: #948C7E;
+    --card: #FFFEFB;
+    --border: #E4DFD1;
+    --jade: #2F5D52;
+    --jade-soft: #DEEAE5;
+    --jade-ink: #1E3F37;
+    --persimmon: #A24E1E;
+    --persimmon-soft: #F2E1CE;
+    --persimmon-ink: #7A3814;
+    --shadow: 0 1px 2px rgba(42,37,33,0.05), 0 6px 16px -10px rgba(42,37,33,0.18);
+    --shadow-hover: 0 4px 10px rgba(42,37,33,0.08), 0 14px 28px -14px rgba(42,37,33,0.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #1B1916;
+      --bg-alt: #232019;
+      --ink: #ECE6DA;
+      --ink-soft: #B3AA98;
+      --ink-faint: #857D6E;
+      --card: #232019;
+      --border: #38332A;
+      --jade: #7BC1AC;
+      --jade-soft: #223530;
+      --jade-ink: #A9DCC9;
+      --persimmon: #E5985E;
+      --persimmon-soft: #3A2A1B;
+      --persimmon-ink: #F0B989;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 20px -12px rgba(0,0,0,0.5);
+      --shadow-hover: 0 4px 12px rgba(0,0,0,0.35), 0 18px 32px -14px rgba(0,0,0,0.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #1B1916;
+    --bg-alt: #232019;
+    --ink: #ECE6DA;
+    --ink-soft: #B3AA98;
+    --ink-faint: #857D6E;
+    --card: #232019;
+    --border: #38332A;
+    --jade: #7BC1AC;
+    --jade-soft: #223530;
+    --jade-ink: #A9DCC9;
+    --persimmon: #E5985E;
+    --persimmon-soft: #3A2A1B;
+    --persimmon-ink: #F0B989;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 20px -12px rgba(0,0,0,0.5);
+    --shadow-hover: 0 4px 12px rgba(0,0,0,0.35), 0 18px 32px -14px rgba(0,0,0,0.6);
+  }
+
+  *{ box-sizing: border-box; }
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.6;
+  }
+  .page{
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  /* ---------- Header ---------- */
+  header.top{
+    margin-bottom: 26px;
+  }
+  .eyebrow{
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--jade);
+    text-transform: uppercase;
+  }
+  h1{
+    font-family: 'Gowun Batang', serif;
+    font-weight: 700;
+    font-size: clamp(30px, 5vw, 42px);
+    margin: 6px 0 10px;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+  .lede{
+    max-width: 60ch;
+    color: var(--ink-soft);
+    font-size: 15.5px;
+  }
+  .lede strong{ color: var(--ink); font-weight: 600; }
+  .visited-count{
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .visited-count b{ color: var(--jade-ink); font-weight: 700; }
+
+  /* ---------- Timeline ---------- */
+  .timeline{
+    margin: 24px 0 8px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px 18px;
+    box-shadow: var(--shadow);
+  }
+  .timeline-track{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin: 26px 6px 6px;
+  }
+  .timeline-track::before{
+    content: "";
+    position: absolute;
+    left: 4px; right: 4px; top: 5px;
+    height: 2px;
+    background: var(--border);
+  }
+  .timeline-seg{
+    position: absolute;
+    top: 5px; height: 2px;
+    background: var(--jade);
+    left: 4px;
+    width: 38%;
+  }
+  .tpoint{
+    position: relative;
+    text-align: center;
+    width: 33.3%;
+    font-size: 13px;
+  }
+  .tpoint:first-child{ text-align: left; }
+  .tpoint:last-child{ text-align: right; }
+  .tdot{
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--card);
+    border: 2px solid var(--jade);
+    margin: 0 auto 10px;
+  }
+  .tpoint:first-child .tdot{ margin-left: 0; }
+  .tpoint:last-child .tdot{ margin-right: 0; margin-left: auto; border-color: var(--ink-faint); }
+  .tdate{
+    font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .tlabel{ color: var(--ink-soft); font-size: 12.5px; margin-top: 2px; }
+  .thighlight{
+    margin-top: 14px;
+    font-size: 13.5px;
+    color: var(--jade-ink);
+    background: var(--jade-soft);
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: inline-block;
+  }
+
+  /* ---------- Category sections ---------- */
+  section.category{ margin-top: 42px; }
+  .cat-head{
+    display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+  }
+  .cat-icon{ flex: none; color: var(--jade); }
+  .cat-head h2{
+    font-family: 'Gowun Batang', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+  }
+  .cat-count{ margin-left: auto; font-size: 12.5px; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+
+  .dish-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 14px;
+  }
+
+  .chip{
+    display: inline-flex; align-items: center;
+    font-size: 11px; font-weight: 600;
+    padding: 3px 9px; border-radius: 100px;
+    white-space: nowrap;
+  }
+  .chip-source{ background: var(--jade-soft); color: var(--jade-ink); }
+  .chip-flag{ background: var(--persimmon-soft); color: var(--persimmon-ink); }
+
+  /* ---------- Dish card ---------- */
+  .dish{
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 44px 16px 18px;
+    box-shadow: var(--shadow);
+    transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+  }
+  .dish:hover{ transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+  .dish.done{ opacity: 0.55; }
+
+  .visited{ position: absolute; top: 12px; right: 12px; cursor: pointer; }
+  .visited input{ position: absolute; opacity: 0; width: 28px; height: 28px; cursor: pointer; margin: 0; }
+  .mark{
+    display: flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 50%;
+    border: 1.5px solid var(--border);
+    background: var(--bg-alt);
+    position: relative;
+  }
+  .visited input:checked + .mark{ background: var(--jade); border-color: var(--jade); }
+  .visited input:checked + .mark::after{
+    content: "";
+    width: 5px; height: 9px;
+    border: solid var(--card);
+    border-width: 0 2px 2px 0;
+    transform: rotate(40deg) translate(-1px,-1px);
+  }
+  .visited input:focus-visible + .mark{ outline: 2px solid var(--jade); outline-offset: 2px; }
+
+  .chips{ display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+
+  .dish h3{
+    font-family: 'Gowun Batang', serif;
+    font-size: 20px; font-weight: 700; margin: 0 0 8px;
+    color: var(--ink);
+    padding-right: 22px;
+  }
+  .dish.done h3{ text-decoration: line-through; text-decoration-color: var(--ink-faint); }
+
+  .place-link{
+    display: block;
+    font-size: 15.5px; font-weight: 700;
+    color: var(--jade-ink);
+    text-decoration: none;
+    margin-bottom: 2px;
+  }
+  .place-link .arrow{ color: var(--jade); font-weight: 400; margin-left: 2px; }
+  .place-link:hover{ text-decoration: underline; text-underline-offset: 3px; }
+
+  .place-pending{
+    font-size: 14.5px; font-weight: 600;
+    color: var(--persimmon-ink);
+    margin: 0 0 2px;
+  }
+
+  .area{ margin: 0 0 8px; font-size: 12.5px; color: var(--ink-faint); }
+
+  .note{ margin: 0 0 12px; font-size: 13.5px; line-height: 1.65; color: var(--ink-soft); }
+
+  .linkrow{ display: flex; flex-wrap: wrap; gap: 8px; }
+  .linkrow a{
+    font-size: 12px; font-weight: 600;
+    color: var(--jade-ink);
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid var(--jade);
+    border-radius: 100px;
+    transition: background .15s ease, color .15s ease;
+  }
+  .linkrow a:hover{ background: var(--jade); color: var(--card); }
+  .linkrow a.ghost{
+    color: var(--ink-faint);
+    border-color: var(--border);
+  }
+  .linkrow a.ghost:hover{ background: var(--bg-alt); color: var(--ink-soft); }
+
+  footer.page-foot{
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--ink-faint);
+  }
+  footer.page-foot p{ max-width: 62ch; }
+
+  @media (max-width: 480px){
+    .timeline-track{ margin-top: 22px; }
+    .tpoint{ font-size: 11.5px; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="top">
+    <div class="eyebrow">두바이 → 서울 · 2주간의 밥 약속</div>
+    <h1>미라씨 밥상</h1>
+    <p class="lede">엄마가 두바이에서 돌아오면 챙겨 먹을 서울 음식들. <strong>식당 이름을 누르면 네이버 검색(지도·정보)으로, "블로그 후기"를 누르면 실제 후기로</strong> 넘어가요. 쭉 훑어보다가 땡기는 게 있으면 그날 저녁으로 찜하면 됩니다.</p>
+    <p class="visited-count" id="visited-count"><b>0</b> / 18 다녀왔어요</p>
+  </header>
+
+  <div class="timeline">
+    <div class="timeline-track">
+      <div class="timeline-seg"></div>
+      <div class="tpoint">
+        <div class="tdot"></div>
+        <div class="tdate">9.12(토) 오후</div>
+        <div class="tlabel">엄마 입국</div>
+      </div>
+      <div class="tpoint">
+        <div class="tdot"></div>
+        <div class="tdate">9.25(금)</div>
+        <div class="tlabel">아빠 합류(후발대)</div>
+      </div>
+      <div class="tpoint">
+        <div class="tdot"></div>
+        <div class="tdate">10.8(목) 경</div>
+        <div class="tlabel">서울 체류 종료 예정</div>
+      </div>
+    </div>
+    <span class="thighlight">9.12 ~ 9.25, 약 2주는 재원 혼자 엄마 식사를 챙겨야 하는 구간 — 이 리스트가 진가를 발휘할 시간</span>
+  </div>
+
+  <!-- ================= 탕·구이 ================= -->
+  <section class="category">
+    <div class="cat-head">
+      <svg class="cat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M9 3c-.5 1.5.5 2-.3 3.5M13 3c-.5 1.5.5 2-.3 3.5"/><path d="M4 10h16c0 5-2.5 9-8 9s-8-4-8-9Z"/><path d="M4 10c-1.2 0-2 .8-2 2s1 2.3 2.8 2.4M20 10c1.2 0 2 .8 2 2s-1 2.3-2.8 2.4"/></svg>
+      <h2>탕 · 구이</h2>
+      <span class="cat-count">3곳</span>
+    </div>
+    <div class="dish-list">
+
+      <article class="dish" data-id="seolleongtang">
+        <label class="visited"><input type="checkbox" data-id="seolleongtang" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">재원 추천</span></div>
+        <h3>한양설렁탕</h3>
+        <a class="place-link" href="https://search.naver.com/search.naver?query=한양설농탕%20마포" rel="noopener">한양설농탕 <span class="arrow">↗</span></a>
+        <p class="area">마포역 앞 · 도화동</p>
+        <p class="note">뽀얗게 우린 사골 국물에 밥 한 공기 말면 끝. 마포역 나서자마자 바로라 퇴근길에 슬쩍 붙이기 좋아요.</p>
+        <div class="linkrow">
+          <a href="https://search.naver.com/search.naver?query=한양설농탕%20마포" rel="noopener">네이버 검색</a>
+          <a href="https://search.naver.com/search.naver?where=view&query=한양설농탕%20마포" rel="noopener">블로그 후기</a>
+        </div>
+      </article>
+
+      <article class="dish" data-id="bokguk">
+        <label class="visited"><input type="checkbox" data-id="bokguk" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">전미라 요청</span></div>
+        <h3>복국</h3>
+        <a class="place-link" href="https://search.naver.com/search.naver?query=길복정%20광화문" rel="noopener">길복정 <span class="arrow">↗</span></a>
+        <p class="area">광화문 · 복지리·복튀김 전문</p>
+        <p class="note">해장은 핑계고, 사실 술 없이도 맑은 국물만으로 개운해지는 집. 같은 골목 제주도복집도 후보.</p>
+        <div class="linkrow">
+          <a href="https://search.naver.com/search.naver?query=길복정%20광화문" rel="noopener">네이버 검색</a>
+          <a href="https://search.naver.com/search.naver?where=view&query=길복정%20광화문" rel="noopener">블로그 후기</a>
+        </div>
+      </article>
+
+      <article class="dish" data-id="hwangtae">
+        <label class="visited"><input type="checkbox" data-id="hwangtae" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">재원 추천</span></div>
+        <h3>황태구이</h3>
+        <a class="place-link" href="https://search.naver.com/search.naver?query=월순%20홍가네%20철판동태찜%20서대문" rel="noopener">월순 홍가네 철판동태찜 <span class="arrow">↗</span></a>
+        <p class="area">서대문역 인근</p>
+        <p class="note">엄밀히는 황태구이가 아니라 매콤한 철판 동태찜인데, 재원이 직접 골라둔 곳이라 이걸로 확정. 서대문역이라 이대·광화문과 묶기 좋아요.</p>
+        <div class="linkrow">
+          <a href="https://search.naver.com/search.naver?query=월순%20홍가네%20철판동태찜%20서대문" rel="noopener">네이버 검색</a>
+          <a href="https://search.naver.com/search.naver?where=view&query=월순%20홍가네%20철판동태찜" rel="noopener">블로그 후기</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= 국수 ================= -->
+  <section class="category">
+    <div class="cat-head">
+      <svg class="cat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 11h16c0 5-2.2 9-8 9s-8-4-8-9Z"/><path d="M7 11c0-2 1-3 1-5M12 11c0-2.4 1.3-3.4 1-6M17 11c0-2 1-3 1-5"/><path d="M4 11c0-1 .9-2 2-2h12c1.1 0 2 1 2 2"/></svg>
+      <h2>국수</h2>
+      <span class="cat-count">3곳</span>
+    </div>
+    <div class="dish-list">
+
+      <article class="dish" data-id="myeongdong-kalguksu">
+        <label class="visited"><input type="checkbox" data-id="myeongdong-kalguksu" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">재원 추천</span><span class="chip chip-source">전미라 요청</span></div>
+        <h3>명동칼국수</h3>
+        <a class="place-link" href="https://search.naver.com/search.naver?query=명동교자%20본점" rel="noopener">명동교자 본점 <span class="arrow">↗</span></a>
+        <p class="area">명동 · 을지로/광화문에서 도보권</p>
+        <p class="note">진한 사골 국물에 꽉 찬 만두. 둘이 따로따로 말한 유일한 메뉴라 사실상 만장일치 1순위.</p>
+        <div class="linkrow">
+          <a href="https://search.naver.com/search.naver?query=명동교자%20본점" rel="noopener">네이버 검색</a>
+          <a href="https://search.naver.com/search.naver?where=view&query=명동교자%20본점" rel="noopener">블로그 후기</a>
+        </div>
+      </article>
+
+      <article class="dish" data-id="hamheung-naengmyeon">
+        <label class="visited"><input type="checkbox" data-id="hamheung-naengmyeon" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">재원 추천</span></div>
+        <h3>오장동 함흥냉면</h3>
+        <a class="place-link" href="https://search.naver.com/search.naver?query=오장동흥남집%20본점" rel="noopener">오장동흥남집 본점 <span class="arrow">↗</span></a>
+        <p class="area">중구 오장동 · 함흥냉면 원조 거리</p>
+        <p class="note">쫄깃한 면발에 새콤달콤 양념, 60년 넘게 자리 지킨 원조. 기본이 비빔이라 아래 항목도 여기서 같이 해결돼요.</p>
+        <div class="linkrow">
+          <a href="https://search.naver.com/search.naver?query=오장동흥남집%20본점" rel="noopener">네이버 검색</a>
+          <a href="https://search.naver.com/search.naver?where=view&query=오장동흥남집%20본점" rel="noopener">블로그 후기</a>
+        </div>
+      </article>
+
+      <article class="dish" data-id="bibim-naengmyeon">
+        <label class="visited"><input type="checkbox" data-id="bibim-naengmyeon" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">전미라 요청</span></div>
+        <h3>비빔냉면</h3>
+        <a class="place-link" href="https://search.naver.com/search.naver?query=오장동흥남집%20본점" rel="noopener">오장동흥남집 <span class="arrow">↗</span></a>
+        <p class="area">위 함흥냉면과 같은 곳 · 또는 을지로 우래옥</p>
+        <p class="note">따로 갈 필요 없이 오장동 함흥냉면 방문 때 비빔으로 주문하면 한 번에 해결돼요.</p>
+        <div class="linkrow">
+          <a href="https://search.naver.com/search.naver?query=오장동흥남집%20본점" rel="noopener">네이버 검색</a>
+          <a href="https://search.naver.com/search.naver?where=view&query=오장동흥남집%20본점" rel="noopener">블로그 후기</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= 고기 ================= -->
+  <section class="category">
+    <div class="cat-head">
+      <svg class="cat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l4.5-4.5"/><path d="M9.5 15.5 15 10c1.7-1.7 1.7-4.3 0-6s-4.3-1.7-6 0l-5.5 5.5c-1.4 1.4-1.4 3.6 0 5s3.6 1.4 5-1Z"/><circle cx="17" cy="7" r="1.2" fill="currentColor" stroke="none"/></svg>
+      <h2>고기</h2>
+      <span class="cat-count">3곳</span>
+    </div>
+    <div class="dish-list">
+
+      <article class="dish" data-id="jobakjip">
+        <label class="visited"><input type="checkbox" data-id="jobakjip" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">재원 추천</span><span class="chip chip-source">전미라 요청</span></div>
+        <h3>마포 조박집 돼지갈비</h3>
+        <a class="place-link" href="https://search.naver.com/search.naver?query=원조%20조박집%20마포" rel="noopener">원조 조박집 <span class="arrow">↗</span></a>
+        <p class="area">마포역 인근 · 돼지갈비 + 동치미국수</p>
+        <p class="note">숯불에 노릇하게 구운 갈비 한 점, 마무리는 시원한 동치미국수. 마포역 5분이라 퇴근길에 바로 합류 가능. 전미라의 "돼지갈비"도 여기로 통합.</p>
+        <div class="linkrow">
+          <a href="https://search.naver.com/search.naver?query=원조%20조박집%20마포" rel="noopener">네이버 검색</a>
+          <a href="https://search.naver.com/search.naver?where=view&query=원조%20조박집%20마포" rel="noopener">블로그 후기</a>
+        </div>
+      </article>
+
+      <article class="dish" data-id="dakgalbi">
+        <label class="visited"><input type="checkbox" data-id="dakgalbi" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">전미라 요청</span></div>
+        <h3>동네닭갈비</h3>
+        <a class="place-link" href="https://search.naver.com/search.naver?query=신미경%20홍대%20닭갈비" rel="noopener">신미경 홍대 닭갈비 <span class="arrow">↗</span></a>
+        <p class="area">홍대입구역 · 30년 전통</p>
+        <p class="note">매콤 짭짤한 철판 닭갈비에 치즈까지 올리면 실패 없음. 숙소(홍대입구역)에서 가장 가까운 후보라 입국 후 첫 끼로도 무리 없어요.</p>
+        <div class="linkrow">
+          <a href="https://search.naver.com/search.naver?query=신미경%20홍대%20닭갈비" rel="noopener">네이버 검색</a>
+          <a href="https://search.naver.com/search.naver?where=view&query=신미경%20홍대%20닭갈비" rel="noopener">블로그 후기</a>
+        </div>
+      </article>
+
+      <article class="dish" data-id="donkatsu">
+        <label class="visited"><input type="checkbox" data-id="donkatsu" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">전미라 요청</span></div>
+        <h3>돈까스</h3>
+        <a class="place-link" href="https://search.naver.com/search.naver?query=최강금돈까스%20합정" rel="noopener">최강금돈까스 <span class="arrow">↗</span></a>
+        <p class="area">합정역 · 흑돼지 등심·안심 돈까스</p>
+        <p class="note">두툼한 흑돼지 등심을 바삭하게 튀겨낸 집. 합정역이라 홍대·마포 동선에서 크게 벗어나지 않아요.</p>
+        <div class="linkrow">
+          <a href="https://search.naver.com/search.naver?query=최강금돈까스%20합정" rel="noopener">네이버 검색</a>
+          <a href="https://search.naver.com/search.naver?where=view&query=최강금돈까스%20합정" rel="noopener">블로그 후기</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= 회 · 해산물 ================= -->
+  <section class="category">
+    <div class="cat-head">
+      <svg class="cat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12c3-4 7-6 11-6 3 0 5.5 2 7 6-1.5 4-4 6-7 6-4 0-8-2-11-6Z"/><path d="M14 8.5c1 1 1 2.9 0 3.9M18 9.5c.6.8.6 1.7 0 2.5"/><circle cx="8.3" cy="11" r=".9" fill="currentColor" stroke="none"/></svg>
+      <h2>회 · 해산물</h2>
+      <span class="cat-count">7곳</span>
+    </div>
+    <div class="dish-list">
+
+      <article class="dish" data-id="daebangeo">
+        <label class="visited"><input type="checkbox" data-id="daebangeo" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">재원 추천</span><span class="chip chip-flag">제철 아님</span></div>
+        <h3>대방어회</h3>
+        <p class="place-pending">이번엔 보류로 확정</p>
+        <p class="area">방어 제철: 11월 ~ 2월</p>
+        <p class="note">지금은 살이 덜 오른 시기라 아쉬운 선택. 재원과 상의해서 이번엔 미루고, 11월 넘어가면 무조건 1순위. 이번엔 아래 "제철회"로 대체.</p>
+        <div class="linkrow">
+          <a class="ghost" href="https://search.naver.com/search.naver?where=view&query=서울%20대방어%20맛집" rel="noopener">겨울 대비 검색</a>
+        </div>
+      </article>
+
+      <article class="dish" data-id="gwamegi">
+        <label class="visited"><input type="checkbox" data-id="gwamegi" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">재원 추천</span><span class="chip chip-flag">제철 아님</span></div>
+        <h3>과메기</h3>
+        <p class="place-pending">이번엔 보류로 확정</p>
+        <p class="area">과메기 제철: 11월 ~ 2월</p>
+        <p class="note">완전히 계절 밖이라 재원과 상의해서 이번엔 빼기로 확정. 겨울에 다시 오시게 되면 그때 꼭.</p>
+        <div class="linkrow">
+          <a class="ghost" href="https://search.naver.com/search.naver?where=view&query=서울%20과메기%20맛집" rel="noopener">겨울 대비 검색</a>
+        </div>
+      </article>
+
+      <article class="dish" data-id="jecheolhoe">
+        <label class="visited"><input type="checkbox" data-id="jecheolhoe" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">재원 추천</span></div>
+        <h3>제철회</h3>
+        <a class="place-link" href="https://search.naver.com/search.naver?query=이요이요스시%20공덕" rel="noopener">이요이요스시 <span class="arrow">↗</span></a>
+        <p class="area">공덕 · 마포 (여러 지점)</p>
+        <p class="note">대방어·과메기 대신 채운 자리. 가성비 좋은 오마카세로 소문나서 그날그날 잡히는 제철 생선을 코스로 맛볼 수 있어요. 공덕·마포에 지점이 여럿이라 동선 잡기도 쉬움.</p>
+        <div class="linkrow">
+          <a href="https://search.naver.com/search.naver?query=이요이요스시%20공덕" rel="noopener">네이버 검색</a>
+          <a href="https://search.naver.com/search.naver?where=view&query=이요이요스시%20공덕" rel="noopener">블로그 후기</a>
+        </div>
+      </article>
+
+      <article class="dish" data-id="agujjim">
+        <label class="visited"><input type="checkbox" data-id="agujjim" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">재원 추천</span></div>
+        <h3>아구찜</h3>
+        <a class="place-link" href="https://search.naver.com/search.naver?query=원마산아구찜%20마포" rel="noopener">원마산아구찜 <span class="arrow">↗</span></a>
+        <p class="area">마포역 · 마포 직장인들 단골집</p>
+        <p class="note">매콤한 아귀 살에 콩나물 아삭. 재원 회사 코앞이라 평일 저녁에도 부담 없이 잡을 수 있어요.</p>
+        <div class="linkrow">
+          <a href="https://search.naver.com/search.naver?query=원마산아구찜%20마포" rel="noopener">네이버 검색</a>
+          <a href="https://search.naver.com/search.naver?where=view&query=원마산아구찜%20마포" rel="noopener">블로그 후기</a>
+        </div>
+      </article>
+
+      <article class="dish" data-id="mideodeok">
+        <label class="visited"><input type="checkbox" data-id="mideodeok" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">재원 추천</span><span class="chip chip-flag">확인 필요</span></div>
+        <h3>미더덕</h3>
+        <p class="place-pending">원마산아구찜에서 겸할 가능성 높음</p>
+        <p class="area">마포역</p>
+        <p class="note">아구찜집에서 미더덕찜을 같이 파는 경우가 많아요. 위 아구찜 갈 때 메뉴판부터 확인해보는 걸 추천.</p>
+        <div class="linkrow">
+          <a class="ghost" href="https://search.naver.com/search.naver?where=view&query=미더덕찜%20마포" rel="noopener">후보 구경하기</a>
+        </div>
+      </article>
+
+      <article class="dish" data-id="kkomak">
+        <label class="visited"><input type="checkbox" data-id="kkomak" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">전미라 요청</span></div>
+        <h3>꼬막무침</h3>
+        <a class="place-link" href="https://search.naver.com/search.naver?query=강릉엄지네꼬막집%20서대문역점" rel="noopener">강릉엄지네꼬막집 서대문역점 <span class="arrow">↗</span></a>
+        <p class="area">서대문역 · 이대에서 가까운 편</p>
+        <p class="note">간장 양념 꼬막을 밥에 슥슥 비비면 그게 꼬막비빔밥. 한 끼로 충분해서 이대 나들이 코스에 얹기 좋아요.</p>
+        <div class="linkrow">
+          <a href="https://search.naver.com/search.naver?query=강릉엄지네꼬막집%20서대문역점" rel="noopener">네이버 검색</a>
+          <a href="https://search.naver.com/search.naver?where=view&query=강릉엄지네꼬막집%20서대문역점" rel="noopener">블로그 후기</a>
+        </div>
+      </article>
+
+      <article class="dish" data-id="meonggae-bibimbap">
+        <label class="visited"><input type="checkbox" data-id="meonggae-bibimbap" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">재원 추천</span><span class="chip chip-flag">확인 필요</span></div>
+        <h3>먹게비빔밥</h3>
+        <p class="place-pending">"멍게비빔밥" 오타로 추정</p>
+        <p class="area">종로·광화문권 확정 맛집 못 찾음</p>
+        <p class="note">멍게 특유의 향과 짭짤한 밥 조합인데, 원문 그대로면 뜻이 안 통해서 멍게비빔밥으로 추정만 하고 아직 확실한 맛집은 못 잡았어요. 메뉴명부터 확인해주시면 이어서 찾아볼게요.</p>
+        <div class="linkrow">
+          <a class="ghost" href="https://search.naver.com/search.naver?where=view&query=멍게비빔밥%20서울" rel="noopener">후보 구경하기</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ================= 비빔밥 ================= -->
+  <section class="category">
+    <div class="cat-head">
+      <svg class="cat-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 10h16c0 5-2.5 9-8 9s-8-4-8-9Z"/><circle cx="9.5" cy="8.2" r=".9" fill="currentColor" stroke="none"/><circle cx="13.5" cy="7" r=".9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="9.3" r=".9" fill="currentColor" stroke="none"/><path d="M15 4.5 13.7 6.8"/></svg>
+      <h2>비빔밥</h2>
+      <span class="cat-count">2곳</span>
+    </div>
+    <div class="dish-list">
+
+      <article class="dish" data-id="yukhoe-bibimbap">
+        <label class="visited"><input type="checkbox" data-id="yukhoe-bibimbap" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">전미라 요청</span></div>
+        <h3>육회비빔밥</h3>
+        <a class="place-link" href="https://search.naver.com/search.naver?query=광장시장%20육회골목" rel="noopener">광장시장 육회골목 <span class="arrow">↗</span></a>
+        <p class="area">종로4가 · 종로 나들이와 묶기 좋음</p>
+        <p class="note">새빨간 육회에 참기름 향. 엄마가 회를 좋아하신다니 육회 접시까지 따로 시켜도 좋을 것 같아요. 시장통 구경도 겸사겸사.</p>
+        <div class="linkrow">
+          <a href="https://search.naver.com/search.naver?query=광장시장%20육회골목" rel="noopener">네이버 검색</a>
+          <a href="https://search.naver.com/search.naver?where=view&query=광장시장%20육회골목" rel="noopener">블로그 후기</a>
+        </div>
+      </article>
+
+      <article class="dish" data-id="jeonju-bibimbap">
+        <label class="visited"><input type="checkbox" data-id="jeonju-bibimbap" aria-label="다녀왔어요"><span class="mark"></span></label>
+        <div class="chips"><span class="chip chip-source">전미라 요청</span></div>
+        <h3>전주비빔밥</h3>
+        <a class="place-link" href="https://search.naver.com/search.naver?query=고궁%20광화문점" rel="noopener">고궁 광화문점 <span class="arrow">↗</span></a>
+        <p class="area">광화문 · 대안: 종로회관(45년 전통)</p>
+        <p class="note">고슬고슬한 밥 위에 나물 한가득, 놋그릇 비주얼까지 그 자체로 한 상. 복국·육회골목과 같은 날 묶으면 종로 나들이 하루로 세 개 다 해결돼요.</p>
+        <div class="linkrow">
+          <a href="https://search.naver.com/search.naver?query=고궁%20광화문점" rel="noopener">네이버 검색</a>
+          <a href="https://search.naver.com/search.naver?where=view&query=고궁%20광화문점" rel="noopener">블로그 후기</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <footer class="page-foot">
+    <p>이 리스트는 재원이 만든 초안입니다. "확인 필요" 표시된 2곳(미더덕·먹게비빔밥)은 아직 상호를 특정하지 못해 검색 링크만 남겨뒀어요 — 정확한 가게를 알거나 다른 후보가 생기면 알려주면 바로 반영할게요. 다녀왔다 표시는 이 기기의 이 브라우저에만 저장되고 서버에는 남지 않습니다.</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var STORAGE_KEY = 'mira-bapsang-checked-v1';
+  var checked = {};
+  try{
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) checked = JSON.parse(raw) || {};
+  }catch(e){}
+
+  var boxes = document.querySelectorAll('.dish input[type="checkbox"]');
+  var total = boxes.length;
+
+  function save(){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(checked)); }catch(e){}
+  }
+
+  function updateCount(){
+    var done = 0;
+    boxes.forEach(function(b){ if(b.checked) done++; });
+    var el = document.getElementById('visited-count');
+    if(el) el.innerHTML = '<b>' + done + '</b> / ' + total + ' 다녀왔어요';
+  }
+
+  boxes.forEach(function(box){
+    var id = box.getAttribute('data-id');
+    if(checked[id]){
+      box.checked = true;
+      var card = box.closest('.dish');
+      if(card) card.classList.add('done');
+    }
+    box.addEventListener('change', function(){
+      checked[id] = box.checked;
+      save();
+      var card = box.closest('.dish');
+      if(card) card.classList.toggle('done', box.checked);
+      updateCount();
+    });
+  });
+
+  updateCount();
+})();
+</script>
